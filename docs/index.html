@@ -416,12 +416,12 @@ The .aar file includes everything you need to begin building your application, i
 </ul>
 <h1 id='initialize-and-login'>Actions Triggers: post-login - API Object</h1><h2 id='initialize'>api.authentication.challengeWith(factor, options)</h2>
 <blockquote>
-<p>Login acts as an entry point to the Ingenico mPOS SDK.</p>
+<p>Note: This method overrides existing policies and rules that enable or disable MFA in a tenant.</p>
 </blockquote>
 <pre class="highlight java tab-java"><code>
-<span class="n">Ingenico</span><span class="o">.</span><span class="na">getInstance</span><span class="o">().</span><span class="na">initialize</span><span class="o">(</span><span class="n">baseURL</span><span class="o">,</span>
-                        <span class="n">apiKey</span><span class="o">,</span>
-                        <span class="n">clientVersion</span><span class="o">);</span> 
+<span class="n">api</span><span class="o">.</span><span class="na">authentication</span><span class="o">().</span><span class="na">challengeWith</span><span class="o">(</span><span class="n">provider_url</span><span class="o">,</span>
+                        <span class="n">factor</span><span class="o">,</span>
+                        <span class="n">options</span><span class="o">);</span> 
 
 </code></pre>
 <p>Challenge the user with one or more specified multifactor authentication factors. This method presents the default challenge first, then allows the user to select a different option if additional factors have been supplied. If the user has not enrolled in any of the factors supplied (including both the default and any additional factors), the command fails. </p>
@@ -434,19 +434,19 @@ The .aar file includes everything you need to begin building your application, i
 </tr>
 </thead><tbody>
 <tr>
-<td>baseURL</td>
+<td>provider_url</td>
 <td>String</td>
-<td>Hostname of the Ingenico Payment Server</td>
+<td>A url representing the identity of the custom authenticated method that was completed.</td>
 </tr>
 <tr>
-<td>apiKey</td>
-<td>String</td>
-<td>API Key of the client application for the Ingenico Payment Server</td>
+<td>factor</td>
+<td>object</td>
+<td>An object containing the type field. type is a string used to specify the default MFA factor or factors used to challenge the user.r</td>
 </tr>
 <tr>
-<td>clientVersion</td>
-<td>String</td>
-<td>Version of the client application</td>
+<td>options</td>
+<td>Optional object</td>
+<td>An object containing the optional additionalFactors field.</td>
 </tr>
 </tbody></table>
 <h2 id='login'>Login</h2><pre class="highlight java tab-java"><code>
